@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include <array>
+#include <cstdlib>
 using namespace std;
 
 struct point2D{
@@ -7,18 +7,29 @@ struct point2D{
 	double y;
 };
 
+point2D createPoint()
+{
+	point2D tmp;
+	tmp.x = rand() % 100;
+	tmp.y = rand() % 100;
+	return tmp;
+}
+
+void createInPlace(point2D& point)
+{
+	point.x = rand() % 100;
+	point.y = rand() % 100;
+}
+
 int main()
 {
-	point2D myPoint;
-	myPoint.x = 3.3;
-	myPoint.y=5.5;
+	point2D myPoint= createPoint();
 	cout << myPoint.x << " , " << myPoint.y<<endl;
+	
+	point2D emptyPoint;
 
-	point2D myOtherPoint;
-	myOtherPoint.x = 6.6;
-	myOtherPoint.y = 7.7;
-	cout << myOtherPoint.x << " , " << myOtherPoint.y<<endl;
-
+	createInPlace(emptyPoint);
+	cout << emptyPoint.x << " , " << emptyPoint.y << endl;
 
 	return 0;
 }
