@@ -10,6 +10,11 @@ struct point2D{
 
 };
 
+float areaOfTriangle(point2D a, point2D b, point2D c)
+{
+	float prod=a.x* (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y);
+	return abs(prod / 2);
+}
 
 point2D createPoint()
 {
@@ -37,13 +42,14 @@ int main()
 		cout << points[i].x << " , " << points[i].y << endl;
 	}
 
-	float largestDistance = 0.0;
-	point2D first, second;
-
+	float largestArea = 0.0;
+	point2D first, second,third;
+	/*
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
+			
 			float d = distance(points[i], points[j]);
 			
 			if (d >= largestDistance)
@@ -55,10 +61,30 @@ int main()
 		}
 	}
 
-	cout << "Distance: " << largestDistance << endl;
-	cout << "for point: " << first.x << "," << first.y << endl;;
-	cout << "to point: " << second.x << "," << second.y << endl;;
+	*/
 
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				float area = areaOfTriangle(points[i], points[j], points[k]);
+				if (area > largestArea)
+				{
+					largestArea = area;
+					first = points[i];
+					second = points[j];
+					third = points[k];
+				}
+			}
+		}
+	}
+
+	cout << "Threa largest area is: " << largestArea << endl;
+	cout << "First point: " << first.x << ","<<first.y << endl;
+	cout << "Second point: " << second.x << "," << second.y << endl;
+	cout << "Third point: " << third.x << "," << third.y << endl;
 	
 
 	return 0;
