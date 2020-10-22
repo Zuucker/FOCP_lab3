@@ -1,11 +1,15 @@
 ﻿#include <iostream>
 #include <cstdlib>
+#include <array>
+#include <cmath>
 using namespace std;
 
 struct point2D{
 	double x;
 	double y;
+
 };
+
 
 point2D createPoint()
 {
@@ -15,21 +19,47 @@ point2D createPoint()
 	return tmp;
 }
 
-void createInPlace(point2D& point)
+float distance(point2D left, point2D right)
 {
-	point.x = rand() % 100;
-	point.y = rand() % 100;
+	return sqrt(pow((right.x - left.x), 2) + pow((right.y - left.y), 2));
+
 }
 
 int main()
 {
 	point2D myPoint= createPoint();
-	cout << myPoint.x << " , " << myPoint.y<<endl;
 	
-	point2D emptyPoint;
+	array<point2D, 10>points;
 
-	createInPlace(emptyPoint);
-	cout << emptyPoint.x << " , " << emptyPoint.y << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		points[i] = createPoint();
+		cout << points[i].x << " , " << points[i].y << endl;
+	}
+
+	float largestDistance = 0.0;
+	point2D first, second;
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			float d = distance(points[i], points[j]);
+			
+			if (d >= largestDistance)
+			{
+				largestDistance = d;
+				first = points[i];
+				second = points[j];
+			}
+		}
+	}
+
+	cout << "Distance: " << largestDistance << endl;
+	cout << "for point: " << first.x << "," << first.y << endl;;
+	cout << "to point: " << second.x << "," << second.y << endl;;
+
+	
 
 	return 0;
 }
