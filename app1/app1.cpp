@@ -27,6 +27,28 @@ struct matrix2D{
 
 	}
 
+	void multiplication(matrix2D other)
+	{
+		if (other.rows() == rows() && other.collumns() == collumns())
+		{
+
+			for (int i = 0; i < rows(); i++)
+			{
+				for (int j = 0; j < collumns(); j++)
+				{
+					contents[i][j] *= other.contents[i][j];
+
+				}
+			}
+
+		}
+		else
+		{
+			cout << "Dimensions must match!" << endl;
+		}
+
+	}
+
 	int rows()
 	{
 		return contents.size();
@@ -86,9 +108,9 @@ int main()
 	cout << "Matrix b:" << endl;
 	b.print();
 
-	a.add(b);
+	a.multiplication(b);
 	
-	cout << "Matrix a+b:" << endl;
+	cout << "Matrix a*b:" << endl;
 	a.print();
 	return 0;
 }
