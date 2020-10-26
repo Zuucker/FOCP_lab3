@@ -98,19 +98,33 @@ struct matrix2D{
 
 int main()
 {
-	matrix2D a, b;
+	matrix2D a;
 	cout << "Introduce data for matrix a:" << endl;
 	a.inputMatrix();
-	cout << "Introduce data for matrix b:" << endl;
-	b.inputMatrix();
+
 	cout << "Matrix a:" << endl;
 	a.print();
-	cout << "Matrix b:" << endl;
-	b.print();
 
-	a.multiplication(b);
+	vector<vector<int>> b(a.collumns());
+
+	for (int i = 0; i <a.rows(); i++)
+	{
+		for (int j = 0; j <a.collumns(); j++)
+		{
+			b[j].push_back(a.contents[i][j]);
+		}
+	}
+
 	
-	cout << "Matrix a*b:" << endl;
-	a.print();
+	cout << "Matrix a transposed:" << endl;
+
+	for (int i = 0; i < b.size(); i++)
+	{
+		for (int j = 0; j < b[0].size(); j++)
+		{
+			cout << b[i][j] << " ";
+		}
+		cout << endl;
+	}
 	return 0;
 }
